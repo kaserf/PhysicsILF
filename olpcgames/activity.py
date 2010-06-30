@@ -160,9 +160,24 @@ class PygameActivity(activity.Activity):
         assert self.game_handler or self.game_name, 'You must specify a game_handler or game_name on your Activity (%r)'%(
             self.game_handler or self.game_name
         )
+
+        #hack to show feedback below the canvas for ILF
+        main_vbox = gtk.VBox()
+        self.statusbar = gtk.Statusbar()
+        self.statusbar.push(0, "")
+        self.statusbar.set_has_resize_grip(False)
+        main_vbox.pack_end(self.statusbar, False, False, 0)
+        self.statusbar.show()
+
         if self.pygame_mode != 'Cairo':
             self._pgc = self.PYGAME_CANVAS_CLASS(*self.game_size)
-            self.set_canvas(self._pgc)
+
+            #hack
+            main_vbox.pack_start(self._pgc)
+            main_vbox.show()
+            self.set_canvas(main_vbox)
+            #self.show_all() my line ;)
+            #self.set_canvas(self._pgc)
             self._pgc.grab_focus()
             self._pgc.connect_game(self.game_handler or self.game_name)
             # XXX Bad coder, do not hide in a widely subclassed operation
@@ -174,7 +189,12 @@ class PygameActivity(activity.Activity):
             self._drawarea = gtk.DrawingArea()
             canvas = hippo.Canvas()
             canvas.grab_focus()
-            self.set_canvas(canvas)
+
+            #hack
+            main_vbox.pack_start(self._pgc)
+            main_vbox.show()
+            self.set_canvas(main_vbox)
+            #self.set_canvas(canvas)
             self.show_all()
 
             import pygamecairo

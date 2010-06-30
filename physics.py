@@ -24,6 +24,7 @@ import elements
 from elements import Elements
 import tools
 from helpers import *
+from ilf import Facade
 
 class PhysicsGame:
     def __init__(self,screen):
@@ -47,10 +48,16 @@ class PhysicsGame:
         # set up static environment
         self.world.add.ground()    
         
+        #set up learning framework
+        self.ilf = Facade(self);
+        
     def run(self):
         self.running = True    
         while self.running:
             for event in pygame.event.get():
+                # notify the learning framework
+                #!!!IMPORTANT!!!: this has to be before the tool handles the event
+                self.ilf.handleEvents(event, self.currentTool)
                 self.currentTool.handleEvents(event)
             # Clear Display
             self.screen.fill((255,255,255)) #255 for white
@@ -76,6 +83,12 @@ class PhysicsGame:
     def setTool(self,tool):
         self.currentTool.cancel()
         self.currentTool = self.toolList[tool] 
+
+    def triggerSupport(self, interaction):
+        olpcgames.ACTIVITY.updateILFLabel("DummyAgent: " + interaction.name + " lead to a problem!")
+
+    def stopSupport(self):
+        olpcgames.ACTIVITY.updateILFLabel("New detection process started...")
 
 def main():
     toolbarheight = 75

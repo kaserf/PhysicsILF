@@ -35,7 +35,16 @@ class PhysicsActivity(olpcgames.PyGameActivity):
 
         # add the toolbars to the toolbox
         toolbox.add_toolbar("Create",create_toolbar)
-        create_toolbar.show()       
+        create_toolbar.show()
+
+        # add a ILF specific toolbar which gives feedback about problems
+        #ilf_toolbar = gtk.Toolbar()
+        #self.ilf_label = gtk.Label("test")
+        #ilf_toolbar.insert_widget(self.ilf_label, "testlabel", None, -1)
+        #self.ilf_label.show()
+        #toolbox.add_toolbar("ILF", ilf_toolbar)
+        #ilf_toolbar.show()
+       
         
         toolbox.show()
         self.set_toolbox(toolbox)
@@ -44,3 +53,6 @@ class PhysicsActivity(olpcgames.PyGameActivity):
 
     def radioClicked(self,button):
         pygame.event.post(olpcgames.eventwrap.Event(pygame.USEREVENT, action=self.radioList[button]))
+
+    def updateILFLabel(self, text):
+        self.statusbar.push(0, text)

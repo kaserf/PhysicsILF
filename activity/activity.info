@@ -1,6 +1,6 @@
 [Activity]
-name = Physics
-service_name = org.laptop.physics
+name = PhysicsILF
+service_name = org.laptop.physicsILF
 class = activity.PhysicsActivity
 icon = activity-physics
 activity_version = 1
