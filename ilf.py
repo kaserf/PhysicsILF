@@ -110,10 +110,10 @@ class InteractionStore:
         if (isinstance(tool, tools.DestroyTool) and event.type == MOUSEBUTTONDOWN):
             print "object deleted"
             destroyInteraction = Interaction("objectDestroyed");
-            bodies = self.game.world.get_bodies_at_pos(pygame.mouse.get_pos())
-            if bodies != False:
-                print bodies
-                print dir(bodies[-1])
+            #bodies = self.game.world.get_bodies_at_pos(pygame.mouse.get_pos())
+            #if bodies != False:
+            #    print bodies
+            #    print dir(bodies[-1])
             self.addInteraction(destroyInteraction)
 
         #always return false
