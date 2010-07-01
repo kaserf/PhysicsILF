@@ -45,7 +45,7 @@ class Add:
         
             Return: box2d.b2Body
         """
-        return self._rect((-10.0, 0.0), 50.0, 0.1, dynamic=False)
+        return self._rect((-10.0, 0.0), 50.0, 0.8, dynamic=False)
             
     def triangle(self, pos, sidelength, dynamic=True, density=1.0, restitution=0.16, friction=0.5, screenCoord=True):
         """ Add a triangle | pos & a in the current input unit system (meters or pixels)

@@ -166,14 +166,14 @@ class PygameActivity(activity.Activity):
         self.statusbar = gtk.Statusbar()
         self.statusbar.push(0, "")
         self.statusbar.set_has_resize_grip(False)
-        main_vbox.pack_end(self.statusbar, False, False, 0)
+        main_vbox.pack_start(self.statusbar, False, False, 0)
         self.statusbar.show()
 
         if self.pygame_mode != 'Cairo':
             self._pgc = self.PYGAME_CANVAS_CLASS(*self.game_size)
 
             #hack
-            main_vbox.pack_start(self._pgc)
+            main_vbox.pack_end(self._pgc)
             main_vbox.show()
             self.set_canvas(main_vbox)
             #self.show_all() my line ;)
@@ -191,7 +191,7 @@ class PygameActivity(activity.Activity):
             canvas.grab_focus()
 
             #hack
-            main_vbox.pack_start(self._pgc)
+            main_vbox.pack_end(self._pgc)
             main_vbox.show()
             self.set_canvas(main_vbox)
             #self.set_canvas(canvas)
